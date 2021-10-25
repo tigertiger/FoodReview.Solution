@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
 using FoodReview.Models;
 
 namespace FoodReview.Controllers
@@ -57,7 +59,7 @@ namespace FoodReview.Controllers
             return BadRequest();
           }
 
-          _db.Entry(food).state = EntityState.Modified;
+          _db.Entry(food).State = EntityState.Modified;
 
           try
           {
@@ -91,9 +93,9 @@ namespace FoodReview.Controllers
           return NoContent();
           }
 
-        }
         private bool FoodExists(int id)
         {
           return _db.Foods.Any(e => e.FoodId == id);
+        }
         }
     }
