@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodReview.Solution.Migrations
 {
     [DbContext(typeof(FoodReviewContext))]
-    [Migration("20211025185409_SeedData")]
-    partial class SeedData
+    [Migration("20211026190028_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

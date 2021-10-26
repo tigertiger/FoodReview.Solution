@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution.csproj": {}
+    "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj": {}
   },
   "projects": {
-    "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution.csproj": {
+    "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution.csproj",
+        "projectUniqueName": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj",
         "projectName": "FoodReview.Solution",
-        "projectPath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution.csproj",
+        "projectPath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj",
         "packagesPath": "/Users/ghost/.nuget/packages/",
-        "outputPath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/obj/",
+        "outputPath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ghost/.nuget/NuGet/NuGet.Config"

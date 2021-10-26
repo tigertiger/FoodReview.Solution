@@ -1,11 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodReview.Solution.Migrations
 {
-    public partial class SeedData : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Foods",
+                columns: table => new
+                {
+                    FoodId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
+                    FoodGroup = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Review = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", maxLength: 10000, nullable: true),
+                    ImageName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    ImageLocation = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Foods", x => x.FoodId);
+                });
+
             migrationBuilder.InsertData(
                 table: "Foods",
                 columns: new[] { "FoodId", "FoodGroup", "ImageLocation", "ImageName", "Name", "Rating", "Review" },
@@ -22,35 +41,8 @@ namespace FoodReview.Solution.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Foods",
-                keyColumn: "FoodId",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Foods",
-                keyColumn: "FoodId",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Foods",
-                keyColumn: "FoodId",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Foods",
-                keyColumn: "FoodId",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Foods",
-                keyColumn: "FoodId",
-                keyValue: 5);
-
-            migrationBuilder.DeleteData(
-                table: "Foods",
-                keyColumn: "FoodId",
-                keyValue: 6);
+            migrationBuilder.DropTable(
+                name: "Foods");
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k2oUmeB/8sJ7SpQsL2ZI7BA28zLNbrpabkq7pmcQe9w2qeRxpOkaOjcBiqhB9MONMzptolRJEXJbGf1QT/Nt2g==",
+  "dgSpecHash": "UIwtkkDYQ+tRPvBXtuouLREX4wik+xyNInsa02hg3x61vVIXrNK6uN8O2iAW7013u6E28FIre9UvPtKlblicJQ==",
   "success": true,
-  "projectFilePath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution.csproj",
+  "projectFilePath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj",
   "expectedPackageFiles": [
     "/Users/ghost/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/ghost/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/5.0.0/microsoft.aspnetcore.authentication.jwtbearer.5.0.0.nupkg.sha512",
