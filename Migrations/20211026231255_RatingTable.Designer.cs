@@ -2,14 +2,16 @@
 using FoodReview.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodReview.Solution.Migrations
 {
     [DbContext(typeof(FoodReviewContext))]
-    partial class FoodReviewContextModelSnapshot : ModelSnapshot
+    [Migration("20211026231255_RatingTable")]
+    partial class RatingTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,44 +122,6 @@ namespace FoodReview.Solution.Migrations
                     b.HasIndex("RatingId");
 
                     b.ToTable("FoodRating");
-
-                    b.HasData(
-                        new
-                        {
-                            FoodRatingId = 1,
-                            FoodId = 1,
-                            RatingId = 1
-                        },
-                        new
-                        {
-                            FoodRatingId = 2,
-                            FoodId = 2,
-                            RatingId = 2
-                        },
-                        new
-                        {
-                            FoodRatingId = 3,
-                            FoodId = 3,
-                            RatingId = 3
-                        },
-                        new
-                        {
-                            FoodRatingId = 4,
-                            FoodId = 4,
-                            RatingId = 4
-                        },
-                        new
-                        {
-                            FoodRatingId = 5,
-                            FoodId = 5,
-                            RatingId = 5
-                        },
-                        new
-                        {
-                            FoodRatingId = 6,
-                            FoodId = 6,
-                            RatingId = 6
-                        });
                 });
 
             modelBuilder.Entity("FoodReview.Models.Rating", b =>

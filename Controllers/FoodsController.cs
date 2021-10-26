@@ -22,16 +22,34 @@ namespace FoodReview.Controllers
 
         // GET: api/Foods
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Food>>> Get()
+        public async Task<ActionResult<IEnumerable<Food>>> Get(string name, string foodGroup, int rating)
         {
-            return await _db.Foods.ToListAsync();
+            var query = _db.Foods.AsQueryable();
+
+            if (name != null)
+            {
+                query = query.Where(entry => entry.Name == name);
+            }
+
+            if (foodGroup != null)
+            {
+                query = query.Where(entry => entry.FoodGroup == foodGroup);
+            }
+
+            // if (rating != 0)
+            // {
+            //     query = query.Where(entry => entry.Rating == rating);
+            // }
+
+            return await query.ToListAsync();
         }
 
         // POST api/foods
         [HttpPost]
-        public async Task<ActionResult<Food>> Post(Food food)
+        public async Task<ActionResult<Food>> Post(Food food, int RatingId)
         {
             _db.Foods.Add(food);
+            _db.FoodRating.Add(new FoodRating() {RatingId = RatingId, FoodId = food.FoodId});
             await _db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetFood), new { id = food.FoodId }, food);
