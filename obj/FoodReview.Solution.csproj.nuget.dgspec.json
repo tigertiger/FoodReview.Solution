@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj": {}
+    "/Users/benjamindunham/Library/Mobile Documents/com~apple~CloudDocs/.Trash/FoodReview.Solution/FoodReview.Solution.csproj": {}
   },
   "projects": {
-    "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj": {
+    "/Users/benjamindunham/Library/Mobile Documents/com~apple~CloudDocs/.Trash/FoodReview.Solution/FoodReview.Solution.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj",
+        "projectUniqueName": "/Users/benjamindunham/Library/Mobile Documents/com~apple~CloudDocs/.Trash/FoodReview.Solution/FoodReview.Solution.csproj",
         "projectName": "FoodReview.Solution",
-        "projectPath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/FoodReview.Solution.csproj",
-        "packagesPath": "/Users/ghost/.nuget/packages/",
-        "outputPath": "/Users/ghost/Desktop/Epicodus/FoodReview.Solution/FoodReview.Solution/obj/",
+        "projectPath": "/Users/benjamindunham/Library/Mobile Documents/com~apple~CloudDocs/.Trash/FoodReview.Solution/FoodReview.Solution.csproj",
+        "packagesPath": "/Users/benjamindunham/.nuget/packages/",
+        "outputPath": "/Users/benjamindunham/Library/Mobile Documents/com~apple~CloudDocs/.Trash/FoodReview.Solution/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ghost/.nuget/NuGet/NuGet.Config"
+          "/Users/benjamindunham/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -81,6 +81,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-x64",
+              "version": "[5.0.9, 5.0.9]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -89,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.100-rc.1.21458.32/RuntimeIdentifierGraph.json"
         }
       }
     }
