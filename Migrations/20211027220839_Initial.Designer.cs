@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodReview.Solution.Migrations
 {
     [DbContext(typeof(FoodReviewContext))]
-    [Migration("20211027211633_Initial")]
+    [Migration("20211027220839_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,17 +24,7 @@ namespace FoodReview.Solution.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageLocation")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("ImageName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Review")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -46,10 +36,7 @@ namespace FoodReview.Solution.Migrations
                         new
                         {
                             FoodId = 1,
-                            ImageLocation = "https://www.refinery29.com/images/10001972.jpg?crop=40%3A21",
-                            ImageName = "glass of milk",
-                            Name = "Milk",
-                            Review = "It's good in coffee."
+                            Name = "Milk"
                         });
                 });
 
@@ -103,6 +90,39 @@ namespace FoodReview.Solution.Migrations
                         });
                 });
 
+            modelBuilder.Entity("FoodReview.Models.Image", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageLocation")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("ImageId");
+
+                    b.HasIndex("FoodId");
+
+                    b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            ImageId = 1,
+                            FoodId = 1,
+                            ImageLocation = "https://www.refinery29.com/images/10001972.jpg?crop=40%3A21",
+                            ImageName = "glass of milk"
+                        });
+                });
+
             modelBuilder.Entity("FoodReview.Models.Pyramid", b =>
                 {
                     b.Property<int>("PyramidId")
@@ -153,6 +173,35 @@ namespace FoodReview.Solution.Migrations
                         });
                 });
 
+            modelBuilder.Entity("FoodReview.Models.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewText")
+                        .IsRequired()
+                        .HasMaxLength(10000)
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("FoodId");
+
+                    b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            ReviewId = 1,
+                            FoodId = 1,
+                            ReviewText = "It's good in coffee."
+                        });
+                });
+
             modelBuilder.Entity("FoodReview.Models.FoodRating", b =>
                 {
                     b.HasOne("FoodReview.Models.Food", "Food")
@@ -170,6 +219,17 @@ namespace FoodReview.Solution.Migrations
                     b.Navigation("Food");
 
                     b.Navigation("Rating");
+                });
+
+            modelBuilder.Entity("FoodReview.Models.Image", b =>
+                {
+                    b.HasOne("FoodReview.Models.Food", "Food")
+                        .WithMany("Images")
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
                 });
 
             modelBuilder.Entity("FoodReview.Models.Pyramid", b =>
@@ -191,11 +251,26 @@ namespace FoodReview.Solution.Migrations
                     b.Navigation("FoodGroup");
                 });
 
+            modelBuilder.Entity("FoodReview.Models.Review", b =>
+                {
+                    b.HasOne("FoodReview.Models.Food", "Food")
+                        .WithMany("Reviews")
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
+                });
+
             modelBuilder.Entity("FoodReview.Models.Food", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("JoinEntities");
 
                     b.Navigation("JoinEntities2");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("FoodReview.Models.FoodGroup", b =>

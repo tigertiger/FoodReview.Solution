@@ -26,10 +26,7 @@ namespace FoodReview.Solution.Migrations
                 {
                     FoodId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
-                    Review = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
-                    ImageName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ImageLocation = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,6 +44,27 @@ namespace FoodReview.Solution.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rating", x => x.RatingId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    ImageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ImageName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
+                    ImageLocation = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
+                    FoodId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.ImageId);
+                    table.ForeignKey(
+                        name: "FK_Images_Foods_FoodId",
+                        column: x => x.FoodId,
+                        principalTable: "Foods",
+                        principalColumn: "FoodId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,6 +87,26 @@ namespace FoodReview.Solution.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Pyramid_Foods_FoodId",
+                        column: x => x.FoodId,
+                        principalTable: "Foods",
+                        principalColumn: "FoodId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    ReviewId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ReviewText = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", maxLength: 10000, nullable: false),
+                    FoodId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.ReviewId);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Foods_FoodId",
                         column: x => x.FoodId,
                         principalTable: "Foods",
                         principalColumn: "FoodId",
@@ -108,8 +146,8 @@ namespace FoodReview.Solution.Migrations
 
             migrationBuilder.InsertData(
                 table: "Foods",
-                columns: new[] { "FoodId", "ImageLocation", "ImageName", "Name", "Review" },
-                values: new object[] { 1, "https://www.refinery29.com/images/10001972.jpg?crop=40%3A21", "glass of milk", "Milk", "It's good in coffee." });
+                columns: new[] { "FoodId", "Name" },
+                values: new object[] { 1, "Milk" });
 
             migrationBuilder.InsertData(
                 table: "Rating",
@@ -122,9 +160,19 @@ namespace FoodReview.Solution.Migrations
                 values: new object[] { 1, 1, 1 });
 
             migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "FoodId", "ImageLocation", "ImageName" },
+                values: new object[] { 1, 1, "https://www.refinery29.com/images/10001972.jpg?crop=40%3A21", "glass of milk" });
+
+            migrationBuilder.InsertData(
                 table: "Pyramid",
                 columns: new[] { "PyramidId", "FoodGroupId", "FoodId" },
                 values: new object[] { 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Reviews",
+                columns: new[] { "ReviewId", "FoodId", "ReviewText" },
+                values: new object[] { 1, 1, "It's good in coffee." });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FoodRating_FoodId",
@@ -137,6 +185,11 @@ namespace FoodReview.Solution.Migrations
                 column: "RatingId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Images_FoodId",
+                table: "Images",
+                column: "FoodId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pyramid_FoodGroupId",
                 table: "Pyramid",
                 column: "FoodGroupId");
@@ -144,6 +197,11 @@ namespace FoodReview.Solution.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Pyramid_FoodId",
                 table: "Pyramid",
+                column: "FoodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_FoodId",
+                table: "Reviews",
                 column: "FoodId");
         }
 
@@ -153,7 +211,13 @@ namespace FoodReview.Solution.Migrations
                 name: "FoodRating");
 
             migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
                 name: "Pyramid");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "Rating");
