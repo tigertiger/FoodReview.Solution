@@ -29,6 +29,8 @@ namespace FoodReview.Controllers
             if (name != null)
             {
                 query = query.Where(entry => entry.Name == name);
+                //.Include(entry entry => entry.foodGroup)
+                //.thenInclude(join => join.Group?)
             }
 
             // if (foodGroup != null)
