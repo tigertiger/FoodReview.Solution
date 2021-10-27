@@ -31,10 +31,10 @@ namespace FoodReview.Controllers
                 query = query.Where(entry => entry.Name == name);
             }
 
-            if (foodGroup != null)
-            {
-                query = query.Where(entry => entry.FoodGroup == foodGroup);
-            }
+            // if (foodGroup != null)
+            // {
+            //     query = query.Where(entry => entry.FoodGroup == foodGroup);
+            // }
 
             // if (rating != 0)
             // {

@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodReview.Solution.Migrations
 {
     [DbContext(typeof(FoodReviewContext))]
-    [Migration("20211026231911_TestingSeedingOrder")]
-    partial class TestingSeedingOrder
+    [Migration("20211027211633_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,6 @@ namespace FoodReview.Solution.Migrations
                     b.Property<int>("FoodId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("FoodGroup")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("ImageLocation")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -50,56 +46,31 @@ namespace FoodReview.Solution.Migrations
                         new
                         {
                             FoodId = 1,
-                            FoodGroup = "Dairy",
                             ImageLocation = "https://www.refinery29.com/images/10001972.jpg?crop=40%3A21",
                             ImageName = "glass of milk",
                             Name = "Milk",
                             Review = "It's good in coffee."
-                        },
+                        });
+                });
+
+            modelBuilder.Entity("FoodReview.Models.FoodGroup", b =>
+                {
+                    b.Property<int>("FoodGroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("FgName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("FoodGroupId");
+
+                    b.ToTable("FoodGroup");
+
+                    b.HasData(
                         new
                         {
-                            FoodId = 2,
-                            FoodGroup = "Meat",
-                            ImageLocation = "https://d1nqx6es26drid.cloudfront.net/app/uploads/2015/04/04043817/product-hamburger.png",
-                            ImageName = "hamburger",
-                            Name = "Hamburger",
-                            Review = "This is a good standard food, when you're hungry. It'll fill you up."
-                        },
-                        new
-                        {
-                            FoodId = 3,
-                            FoodGroup = "Dinner",
-                            ImageLocation = "https://www.istockphoto.com/photo/cheesy-pepperoni-pizza-gm938742222-256696208",
-                            ImageName = "Slice of Pizza",
-                            Name = "Pizza",
-                            Review = "This food needs no review because it's the only food that actually matters. Grab a slice, kick back, and relish in the fact that you just took a bite out of heaven."
-                        },
-                        new
-                        {
-                            FoodId = 4,
-                            FoodGroup = "Vegetables",
-                            ImageLocation = "https://images.indianexpress.com/2019/12/Peas_759.jpg",
-                            ImageName = "Peas",
-                            Name = "Peas",
-                            Review = "These little nightmare balls serve no purpose other than to ruin the rest of your meal by tainting your palate."
-                        },
-                        new
-                        {
-                            FoodId = 5,
-                            FoodGroup = "Vegetable",
-                            ImageLocation = "https://www.freshpoint.com/wp-content/uploads/commodity-carrot.jpg",
-                            ImageName = "carrots",
-                            Name = "Carrot",
-                            Review = "Crunchy. Orange. Snowman noses. What more do you want?"
-                        },
-                        new
-                        {
-                            FoodId = 6,
-                            FoodGroup = "Breakfast",
-                            ImageLocation = "https://4eojie3jgd8h1h57zz1bwc39-wpengine.netdna-ssl.com/wp-content/uploads/2018/12/PurelyOs_Main_1028.png",
-                            ImageName = "breakfast cereal",
-                            Name = "Breakfast Cereal",
-                            Review = "Depends."
+                            FoodGroupId = 1,
+                            FgName = "Dairy"
                         });
                 });
 
@@ -122,6 +93,43 @@ namespace FoodReview.Solution.Migrations
                     b.HasIndex("RatingId");
 
                     b.ToTable("FoodRating");
+
+                    b.HasData(
+                        new
+                        {
+                            FoodRatingId = 1,
+                            FoodId = 1,
+                            RatingId = 1
+                        });
+                });
+
+            modelBuilder.Entity("FoodReview.Models.Pyramid", b =>
+                {
+                    b.Property<int>("PyramidId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PyramidId");
+
+                    b.HasIndex("FoodGroupId");
+
+                    b.HasIndex("FoodId");
+
+                    b.ToTable("Pyramid");
+
+                    b.HasData(
+                        new
+                        {
+                            PyramidId = 1,
+                            FoodGroupId = 1,
+                            FoodId = 1
+                        });
                 });
 
             modelBuilder.Entity("FoodReview.Models.Rating", b =>
@@ -141,31 +149,6 @@ namespace FoodReview.Solution.Migrations
                         new
                         {
                             RatingId = 1,
-                            Stars = 2
-                        },
-                        new
-                        {
-                            RatingId = 2,
-                            Stars = 3
-                        },
-                        new
-                        {
-                            RatingId = 3,
-                            Stars = 5
-                        },
-                        new
-                        {
-                            RatingId = 4,
-                            Stars = 1
-                        },
-                        new
-                        {
-                            RatingId = 5,
-                            Stars = 5
-                        },
-                        new
-                        {
-                            RatingId = 6,
                             Stars = 3
                         });
                 });
@@ -189,9 +172,35 @@ namespace FoodReview.Solution.Migrations
                     b.Navigation("Rating");
                 });
 
+            modelBuilder.Entity("FoodReview.Models.Pyramid", b =>
+                {
+                    b.HasOne("FoodReview.Models.FoodGroup", "FoodGroup")
+                        .WithMany("JoinEntities2")
+                        .HasForeignKey("FoodGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodReview.Models.Food", "Food")
+                        .WithMany("JoinEntities2")
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
+
+                    b.Navigation("FoodGroup");
+                });
+
             modelBuilder.Entity("FoodReview.Models.Food", b =>
                 {
                     b.Navigation("JoinEntities");
+
+                    b.Navigation("JoinEntities2");
+                });
+
+            modelBuilder.Entity("FoodReview.Models.FoodGroup", b =>
+                {
+                    b.Navigation("JoinEntities2");
                 });
 
             modelBuilder.Entity("FoodReview.Models.Rating", b =>
